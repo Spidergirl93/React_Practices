@@ -1,3 +1,6 @@
+//React imports
+import { useEffect, useState } from 'react';
+
 //Component imports
 import Card from '../UI/Card';
 import MealList from './MealList';
@@ -5,38 +8,48 @@ import MealList from './MealList';
 //CSS imports 
 import styles from './AvailableMeals.module.css';
 
-//Dummy DB
-const DUMMY_MEALS = [
-    {
-      id: 'm1',
-      name: 'Sushi',
-      description: 'Finest fish and veggies',
-      price: 22.99,
-    },
-    {
-      id: 'm2',
-      name: 'Schnitzel',
-      description: 'A german specialty!',
-      price: 16.5,
-    },
-    {
-      id: 'm3',
-      name: 'Barbecue Burger',
-      description: 'American, raw, meaty',
-      price: 12.99,
-    },
-    {
-      id: 'm4',
-      name: 'Green Bowl',
-      description: 'Healthy...and green...',
-      price: 18.99,
-    },
-  ];
+//misc
+
 
 //Main component
 const AvailableMeals = () => {
 
-    const dummyMeals = DUMMY_MEALS.map(meal => 
+  const [meals, setMeals] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData= async() => {
+      const response = await fetch('https://tasks-52028-default-rtdb.europe-west1.firebasedatabase.app/meals.json');
+      const data = await response.json();
+
+      const mealDB = [];
+      for(const key in data) {
+        mealDB.push({
+          id: key,
+          name: data[key].name,
+          description: data[key].description,
+          price: data[key].price
+        })
+      }
+      setMeals(mealDB);
+    };
+
+    fetchData();
+    setLoading(false);
+    
+  }, []);
+
+
+  if (loading) {
+    return(
+      <section className={styles.loading}>
+        Loading...
+      </section>
+    );
+  }
+
+
+  const mealList = meals.map(meal => 
     <MealList 
     id={meal.id}
     key={meal.id} 
@@ -45,12 +58,13 @@ const AvailableMeals = () => {
     price={meal.price} />)
 
       return(
+        
         <section className={styles.meals}>
             <Card>
                 <ul>
-                    {dummyMeals}
+                    {mealList}
                 </ul>
-            </Card>  
+            </Card> 
         </section>
       );
 };

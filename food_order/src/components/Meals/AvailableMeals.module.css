@@ -22,3 +22,9 @@
       transform: translateY(0);
     }
   }
+
+  .loading {
+    text-align: center;
+    color: white;
+    padding-top: 10rem;
+  }
