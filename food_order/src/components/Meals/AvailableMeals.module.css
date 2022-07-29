@@ -28,3 +28,9 @@
     color: white;
     padding-top: 10rem;
   }
+
+  .error {
+    text-align: center;
+    color: red;
+    padding-top: 10rem;
+  }
