@@ -9,8 +9,8 @@ import classes from './Counter.module.css';
 
 const Counter = () => {
 
-  const counter = useSelector(state => state.counter);
-  const displayStatus = useSelector(state => state.showCounter);
+  const counter = useSelector(state => state.counter.counter);
+  const displayStatus = useSelector(state => state.counter.showCounter);
 
   useEffect(() => {
     const timer = setTimeout(() => {
