@@ -15,7 +15,7 @@ const Counter = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(counterActions.hide());
-    }, 3000);
+    }, 10000);
     return () => clearTimeout(timer);
   }, [displayStatus]);
 
