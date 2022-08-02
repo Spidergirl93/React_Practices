@@ -14,8 +14,7 @@ const Counter = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch({
-        type: 'HIDE',
-        value: 5
+        type: 'HIDE'
       });
     }, 3000);
     return () => clearTimeout(timer);
