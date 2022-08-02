@@ -1,22 +1,30 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-const counterReducer = (state = { counter: 0 }, action) => {
-    if(action.type === 'INCREMENT') {
+const initialState = {
+    counter: 0,
+    showCounter: false
+  };
+
+const counterReducer = (state = initialState, action) => {
+    if(action.type === 'ADD') {
         return(
             {
-                counter: state.counter + 1
+                counter: state.counter + action.value,
+                showCounter: state.showCounter
             }
         );
-    } else if(action.type === 'DECREMENT') {
+    } else if(action.type === 'SHOW') {
         return(
             {
-                counter: state.counter - 1
+                counter: state.counter,
+                showCounter: true
             }
         );
-    } else if(action.type === 'INCREASE') {
+    } else if(action.type === 'HIDE') {
         return(
             {
-                counter: state.counter + action.value
+                counter: state.counter,
+                showCounter: false
             }
         );
     }
