@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
+import {counterActions} from '../store/index';
 import classes from './Counter.module.css';
 
 
@@ -13,9 +14,7 @@ const Counter = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      dispatch({
-        type: 'HIDE'
-      });
+      dispatch(counterActions.hide());
     }, 3000);
     return () => clearTimeout(timer);
   }, [displayStatus]);
@@ -23,24 +22,19 @@ const Counter = () => {
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
-    dispatch({ type: 'ADD', value: 1});
+    dispatch(counterActions.add(1));
   };
 
   const decrementHandler = () => {
-    dispatch({ type: 'ADD', value: -1});
+    dispatch(counterActions.add(-1));
   };
 
   const increaseHandler = () => {
-    dispatch(
-      {
-        type: 'ADD',
-        value: 5
-      }
-    );
+    dispatch(counterActions.add(5));
   };
 
   const toggleCounterHandler = () => {
-    dispatch({type: 'SHOW'});
+    dispatch(counterActions.show());
   };
 
   return (
