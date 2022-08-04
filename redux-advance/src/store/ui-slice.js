@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    isVisible: false
+    isVisible: false,
+    notification: null
+
 };
 
 
@@ -11,6 +13,13 @@ const uiSlice = createSlice({
     reducers: {
         toggle(state) {
             state.isVisible = !state.isVisible;
+        },
+        setNotification(state, action) {
+            state.notification = {
+                status: action.payload.status,
+                title: action.payload.title,
+                message: action.payload.message
+            }
         }
     }
 });
