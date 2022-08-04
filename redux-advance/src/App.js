@@ -31,7 +31,7 @@ function App() {
       firstTime = false;
       return;
     }
-    if(cart.fetching) {
+    if(cart.changed) {
       dispatch(sendCartData(cart));
     }
   
