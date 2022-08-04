@@ -1,7 +1,7 @@
 import { useEffect, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
-import { sendCartData } from './store/cart-slice';
+import { sendCartData, fetchCardData } from './store/cart-actions';
 import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
@@ -22,13 +22,19 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fetchCardData());
+  }, [dispatch]);
+
+  useEffect(() => {
 
     if(firstTime === true) {
       firstTime = false;
       return;
     }
-    dispatch(sendCartData(cart));
-
+    if(cart.fetching) {
+      dispatch(sendCartData(cart));
+    }
+  
   }, [cart, dispatch])
   return (
     <Fragment>
