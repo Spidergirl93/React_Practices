@@ -9,13 +9,14 @@ function App() {
   return (
     <div>
       <MainHeader />
-      <Route path="/welcome">
-        <Welcome />
-      </Route>
-      <Route path="/products">
-        <Products />
-      </Route>
-      <h2>Let's get started!</h2>
+      <main>
+        <Route path="/welcome">
+          <Welcome />
+        </Route>
+        <Route path="/products">
+          <Products />
+        </Route>
+      </main>
     </div>
   );
 }
