@@ -19,9 +19,9 @@ const DUMMY_QUOTES = [
     {
         id: 'q4',
         author: 'Mr. Robot',
-        content: 'I am so high'
+        content: 'I is so high'
     },
-]
+];
 
 
 
