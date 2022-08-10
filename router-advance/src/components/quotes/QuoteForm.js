@@ -33,7 +33,7 @@ const QuoteForm = (props) => {
   };
 
   const finishHandler = () => {
-    setIsEntering(false);
+    setIsEntering(false); 
   };
 
 
