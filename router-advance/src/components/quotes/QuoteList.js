@@ -32,7 +32,11 @@ const QuoteList = (props) => {
 
   const sortHandler = () => {
 
-    history.push('/quotes?sort=' + (isAsc ? 'desc' : 'asc'));
+    history.push(
+    {
+      pathname: location.pathname,
+      search: `?sort=${(isAsc ? 'desc' : 'asc')}`
+    });
 
   };
 
