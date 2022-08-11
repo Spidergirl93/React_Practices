@@ -6,6 +6,8 @@ This application is designed to save and view quotes using firebase db and react
 
 ## Demo
 
+The application can be visited in [here](https://tasks-52028.web.app/quotes).
+
 ### Overal view
 
 See a list of all the quotes and sort them in ascending/descending manner. 
