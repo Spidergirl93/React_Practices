@@ -1,33 +1,12 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useParams, Route, Link, useRouteMatch } from "react-router-dom";
+import useHttp from "../hooks/use-http";
 
-
+import { getSingleQuote } from '../lib/api';
 import Comments from "../components/comments/Comments";
 import HighLightedQuote from '../components/quotes/HighlightedQuote';
 
 
-const DUMMY_QUOTES = [
-    {
-        id: 'q1',
-        author: 'Batman',
-        content: 'I hate Joker'
-    },
-    {
-        id: 'q2',
-        author: 'Maryam',
-        content: 'I Love Pizza'
-    },
-    {
-        id: 'q3',
-        author: 'Shrek',
-        content: 'I am Green'
-    },
-    {
-        id: 'q4',
-        author: 'Mr. Robot',
-        content: 'I is so high'
-    },
-];
 
 
 const QuoteDetail = () => {
@@ -35,15 +14,26 @@ const QuoteDetail = () => {
 
     const match = useRouteMatch();
 
-    const quote = DUMMY_QUOTES.find(quote => (quote.id === params.quoteId));
+    const {sendRequest, data, error} = useHttp(getSingleQuote, true);
 
-    if(!quote) {
-        return <p>No quote found!</p>
+    useEffect(() => {
+        sendRequest(params.quoteId);
+    }, [sendRequest]);
+
+
+    if(!data) {
+        return <p className="centered">No quote found!</p>
+    }
+
+    if (error) {
+        return <div className="centered">
+            <p>An error occured!</p>
+        </div>
     }
 
     return(
         <Fragment>
-            <HighLightedQuote text={quote.content} author={quote.author} />
+            <HighLightedQuote text={data.content} author={data.author} />
             <Route path={match.path} exact>
                 <div className="centered">
                     <Link className="btn--flat" to={`${match.url}/comments`}>
