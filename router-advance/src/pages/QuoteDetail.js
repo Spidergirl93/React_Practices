@@ -14,11 +14,13 @@ const QuoteDetail = () => {
 
     const match = useRouteMatch();
 
+    const { quoteId } = params
+
     const {sendRequest, data, error} = useHttp(getSingleQuote, true);
 
     useEffect(() => {
-        sendRequest(params.quoteId);
-    }, [sendRequest]);
+        sendRequest(quoteId);
+    }, [sendRequest, quoteId]);
 
 
     if(!data) {
