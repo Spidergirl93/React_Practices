@@ -2,7 +2,7 @@
 
 ## Summary
 
-This application is designed to save and view quotes using firebase db and react routers. The users can save quotes, sort them and add comments to each individual quote. There are also prompts and some error handlings to prevent from submitting irrelevant data and/or losing users' information accidentally. 
+This application is designed to save and view quotes using firebase db and react router V5. The users can save quotes, sort them and add comments to each individual quote. There are also prompts and some error handlings to prevent from submitting irrelevant data and/or losing users' information accidentally. 
 
 ## Demo
 
