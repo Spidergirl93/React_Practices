@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { Fragment, useContext } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -8,6 +8,8 @@ import classes from './MainNavigation.module.css';
 const MainNavigation = () => {
 
   const {isLoggedIn} = useContext(AuthContext);
+
+  const {logout: logoutHandler} = useContext(AuthContext);
 
   return (
     <header className={classes.header}>
@@ -19,12 +21,16 @@ const MainNavigation = () => {
           {!isLoggedIn && <li>
             <Link to='/auth'>Login</Link>
           </li>}
-          <li>
-            <Link to='/profile'>Profile</Link>
-          </li>
-          <li>
-            <button>Logout</button>
-          </li>
+          {isLoggedIn && 
+          <Fragment>
+            <li>
+              <Link to='/profile'>Profile</Link>
+            </li>
+            <li>
+              <button onClick={logoutHandler}>Logout</button>
+            </li>
+          </Fragment>
+          }
         </ul>
       </nav>
     </header>
