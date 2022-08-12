@@ -21,38 +21,48 @@ const AuthForm = () => {
 
     const enteredEmail = emailRef.current.value;
     const enteredPass = passRef.current.value;
+    let url;
 
     if(isLogin) {
-
+      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDM9-YuI0iY7iX00-qZO8-w37Rma18MjRQ';
     } else {
-      fetch(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDM9-YuI0iY7iX00-qZO8-w37Rma18MjRQ',
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            email: enteredEmail,
-            password: enteredPass,
-            returnSecureToken: true
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }).then((res) => {
-          if(res.ok) {
-            //...
-          } else {
-            return res.json().then((data) => {
-              console.log(data);
-              let errorMsg = 'Failed';
-
-              if(data && data.error && data.error.message) {
-                errorMsg = data.error.message;
-              }
-              alert(errorMsg);
-            })
-          } 
-        });
+      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDM9-YuI0iY7iX00-qZO8-w37Rma18MjRQ'
     }
+
+    fetch(
+      url,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPass,
+          returnSecureToken: true
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((res) => {
+        if(res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((data) => {
+            console.log(data);
+            let errorMsg = 'Failed';
+
+            if(data && data.error && data.error.message) {
+              errorMsg = data.error.message;
+            }
+
+            throw new Error(errorMsg);
+            
+          })
+        } 
+      }
+    ).then((data) => {
+      console.log(data);
+    }).catch (error => {
+      alert(error.message);
+    });
   };
 
   return (
