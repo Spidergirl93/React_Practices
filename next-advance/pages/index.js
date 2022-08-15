@@ -1,3 +1,5 @@
+import { MongoClient } from "mongodb";
+
 import MeetupList from "../components/meetups/MeetupList";
 
 const DUMMY_DATA = [
@@ -51,9 +53,26 @@ const HomePage = (props) => {
 }; */
 
 export const getStaticProps = async () => {
+  const client = await MongoClient.connect(
+    "mongodb+srv://walkmary:SesameOpen@meetup.ltcqybe.mongodb.net/?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+
+  const meetupCollection = db.collection("meetups");
+
+  const allmeetups = await meetupCollection.find().toArray();
+
+  client.close();
+
   return {
     props: {
-      meetups: DUMMY_DATA,
+      meetups: allmeetups.map((meetup) => ({
+        id: meetup._id.toString(),
+        title: meetup.title,
+        image: meetup.image,
+        address: meetup.address,
+        description: meetup.description,
+      })),
     },
     revalidate: 3600,
   };
