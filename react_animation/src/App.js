@@ -47,8 +47,12 @@ class App extends Component {
                 height: 100,
                 margin: "auto",
                 transition: "opacity 1s ease-out",
-                opacity: state === "exiting" ? 0 : 1,
-                opacity: state === "entering" || state === "entered" ? 1 : 0,
+                opacity:
+                  state === "exiting"
+                    ? 0
+                    : state === "entering" || state === "entered"
+                    ? 1
+                    : 0,
               }}
             />
           )}
