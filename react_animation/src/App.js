@@ -33,6 +33,7 @@ class App extends Component {
           Toggel Block
         </button>
         <br />
+        <br />
         <Transition
           in={this.state.isShowingBlock}
           timeout={300}
@@ -57,15 +58,7 @@ class App extends Component {
             />
           )}
         </Transition>
-        <Transition
-          in={this.state.isModalOpen}
-          timeout={300}
-          mountOnEnter
-          unmountOnExit
-        >
-          {(state) => <Modal show={state} closed={this.hideModal} />}
-        </Transition>
-
+        <Modal show={this.state.isModalOpen} closed={this.hideModal} />
         {this.state.isModalOpen ? (
           <Backdrop show={this.state.isModalOpen} />
         ) : null}
