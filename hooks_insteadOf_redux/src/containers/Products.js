@@ -6,7 +6,7 @@ import ProductItem from "../components/Products/ProductItem";
 import "./Products.css";
 
 const Products = (props) => {
-  const { products: productsList } = useStore()[0];
+  const { products: productsList } = useStore(true)[0];
 
 
   
