@@ -14,8 +14,8 @@ const Greeting = () => {
       <h1>Greeting page</h1>
       <br />
       <p>Welcome to this page!</p>
-      {!isOn && <p>OFF</p>}
-      {isOn && <p>ON</p>}
+      {!isOn && <p >OFF</p>}
+      {isOn && <p >ON</p>}
       <button onClick={onOffHandler}>{isOn ? 'Switch OFF' : 'Switch ON'}</button>
     </div>
   );

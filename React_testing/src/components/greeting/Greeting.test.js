@@ -26,4 +26,14 @@ describe("Greeting component", () => {
     const output = screen.getByText("ON");
     expect(output).toBeInTheDocument();
   });
+
+  test("tests the button functionality", () => {
+    render(<Greeting />);
+    const button = screen.getByRole("button");
+
+    userEvent.click(button);
+
+    const output = screen.queryByText("OFF");
+    expect(output).toBeNull;
+  });
 });
